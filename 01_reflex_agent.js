@@ -30,7 +30,10 @@ function test(states){
        else if (action_result == "RIGHT") states[0] = "B";
        else if (action_result == "LEFT") states[0] = "A";
       if(!stop){		
-        setTimeout(function(){ test(states); }, 2000);
+        setTimeout(function(){ test(states); }, 500);
+        setTimeout(function(){ ensuciar(); }, 100);
+      }else{
+          document.getElementById("finalizado").innerHTML = "Ejecucion Finalizada!</b> "
       }
 }
 
@@ -50,7 +53,7 @@ function mostrar_acciones(){
   document.getElementById("conteoestado6").innerHTML="B | DIRTY | CLEAN -- "+count6;
   document.getElementById("conteoestado7").innerHTML="B | CLEAN | DIRTY -- "+count7;
   document.getElementById("conteoestado8").innerHTML="B | CLEAN | CLEAN -- "+count8;
-  document.getElementById("totalvisitados").innerHTML = "<style:red;> <br><b>Visitados 2 veces o mas:</b> "+total_visitados();
+  document.getElementById("totalvisitados").innerHTML = " <br><b>Visitados 2 veces o mas:</b> "+total_visitados();
   setTimeout(function(){ mostrar_acciones(); }, 1000);
 
 }
@@ -122,6 +125,7 @@ function total_visitados(){
 var count = 0;
   
  for (let index = 0; index < states_list.length; index++) {
+
   if(states_list[index]) count++;
  }
  if(count==8 ){stop = true;}
@@ -129,7 +133,25 @@ var count = 0;
 }
 
 
-function ensuciar(x){
-  states[x] = "DIRTY";
+function ensuciar(){
+  var action = Math.floor(Math.random()*4);
+  switch(action){
+    case 0:
+    break;
+
+    case 1:
+      states[1] = "DIRTY";
+    break;
+
+    case 2:
+      states[2] = "DIRTY";
+    break;
+
+    case 3:
+      states[1] = "DIRTY";
+      states[2] = "DIRTY";
+    break;
+  }
+ 
 }
 
